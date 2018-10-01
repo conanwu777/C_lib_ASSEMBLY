@@ -1,5 +1,4 @@
 NAME = libfts.a
-NAME2 = test
 
 FILENAMES = \
 libfts/ft_bzero.s\
@@ -26,9 +25,6 @@ libfts/ft_toupper.s
 ASM = ~/.brew/Cellar/nasm/2.13.03/bin/nasm -f macho64
 OBJECTS = $(FILENAMES:%.s=%.o)
 
-CFLAGS = -Wall -Wextra -Werror
-SRC = main.c part1.c part2.c
-
 all: $(NAME)
 
 clean:
@@ -36,13 +32,11 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME)
-	/bin/rm -f $(NAME2)
 
 re: fclean all
 
 $(NAME): $(OBJECTS)
 	ar rcs $@ $(OBJECTS)
-	gcc $(CFLAGS) -L. -lfts $(SRC) -o $(NAME2)
 
 %.o: %.s
 	$(ASM) $< -o $@
